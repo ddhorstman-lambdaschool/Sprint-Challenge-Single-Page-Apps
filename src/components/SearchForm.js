@@ -7,8 +7,8 @@ export default function SearchForm({ searchTerm, setSearchTerm, setPageNumber })
   const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
   
   function submitSearch(value) {
-    setSearchTerm(value);
     setPageNumber(1);
+    setSearchTerm(value);
     //console.log("Search submitted!", value);
   }
 

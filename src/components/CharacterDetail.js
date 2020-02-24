@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CharacterCard from "./CharacterCard";
-import { Card, CardFooter } from "reactstrap";
+import { Card } from "reactstrap";
 import axios from "axios";
 import "./styles.scss";
 

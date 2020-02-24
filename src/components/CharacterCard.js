@@ -1,10 +1,9 @@
 import React from "react";
-import { Card, CardBody, CardHeader, CardText, CardTitle, CardFooter, CardImg } from "reactstrap";
-import { Link } from "react-router-dom";
+import { CardBody, CardHeader, CardText, CardTitle, CardFooter, CardImg } from "reactstrap";
 
-export default function CharacterCard({ modal, id, name, status, species, type, gender, origin, location, image, url }) {
-  const { name: originPlanet, url: originPlanetUrl } = origin;
-  const { name: currentPlanet, url: currentPlanetUrl } = location;
+export default function CharacterCard({ modal, name, status, species, gender, origin, location, image }) {
+  const { name: originPlanet/*, url: originPlanetUrl*/ } = origin;
+  const { name: currentPlanet/*, url: currentPlanetUrl*/ } = location;
   return (
     <span>
       <CardHeader>

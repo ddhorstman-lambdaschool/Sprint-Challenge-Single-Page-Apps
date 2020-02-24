@@ -25,9 +25,8 @@ export default function CharacterList() {
         console.log(res);
         setTotalPages(res.data.info.pages);
         if (!res.data.info.prev) setPageNumber(1);
-        return res;
+        setCharactersShown(res.data.results);
       })
-      .then(res => setCharactersShown(res.data.results))
       .catch(console.error);
   }, [searchTerm, pageNumber]);
 
@@ -44,8 +43,8 @@ export default function CharacterList() {
   return (
     <div className="character-list">
       <header className="character-list-header">
-        <h2>Characters:</h2>
-        <SearchForm searchTerm={searchTerm} setSearchTerm={setSearchTerm} setPageNumber={setPageNumber}/>
+        <h3>Characters</h3>
+        <SearchForm searchTerm={searchTerm} setSearchTerm={setSearchTerm} setPageNumber={setPageNumber} />
         <button
           disabled={pageNumber === 1}
           onClick={() => pageNumber >= 1 && setPageNumber(pageNumber - 1)}>
