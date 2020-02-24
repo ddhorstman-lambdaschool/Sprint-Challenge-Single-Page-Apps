@@ -6,10 +6,10 @@ export default function SearchForm({ searchTerm, setSearchTerm, setPageNumber })
 
   const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
   
-  function submitSearch() {
-    setSearchTerm(localSearchTerm || "");
+  function submitSearch(value) {
+    setSearchTerm(value);
     setPageNumber(1);
-    console.log("Search submitted!", localSearchTerm);
+    //console.log("Search submitted!", value);
   }
 
   return (
@@ -19,10 +19,11 @@ export default function SearchForm({ searchTerm, setSearchTerm, setPageNumber })
         placeholder="Start typing a name"
         value={localSearchTerm}
         onChange={e => {
+          let term = e.target.value;
+          setLocalSearchTerm(term);
+          //console.log("Search reset", term);
           window.clearTimeout(submissionTimeout);
-          submissionTimeout = window.setTimeout(submitSearch, 500);
-          setLocalSearchTerm(e.target.value);
-          console.log("Search reset", e.target.value);
+          submissionTimeout = window.setTimeout(() => submitSearch(term), 500);
         }} />
     </section>
   );
