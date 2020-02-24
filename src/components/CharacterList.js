@@ -11,18 +11,25 @@ export default function CharacterList() {
   //const [characters, setCharacters] = useState([]);
   const [charactersShown, setCharactersShown] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     axios
       .get(
         searchTerm
-          ? `https://rickandmortyapi.com/api/character/?name=${searchTerm}`
-          : "https://rickandmortyapi.com/api/character/"
+          ? `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${searchTerm}`
+          : `https://rickandmortyapi.com/api/character/?page=${pageNumber}`
       )
-      //.then(res => { console.log(res); return res; })
+      .then(res => {
+        console.log(res);
+        setTotalPages(res.data.info.pages);
+        if (!res.data.info.prev) setPageNumber(1);
+        return res;
+      })
       .then(res => setCharactersShown(res.data.results))
       .catch(console.error);
-  }, [searchTerm]);
+  }, [searchTerm, pageNumber]);
 
   /*  
     //Old code from MVP search bar behavior
@@ -38,7 +45,17 @@ export default function CharacterList() {
     <div className="character-list">
       <header className="character-list-header">
         <h2>Characters:</h2>
-        <SearchForm searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <SearchForm searchTerm={searchTerm} setSearchTerm={setSearchTerm} setPageNumber={setPageNumber}/>
+        <button
+          disabled={pageNumber === 1}
+          onClick={() => pageNumber >= 1 && setPageNumber(pageNumber - 1)}>
+          Previous Page
+          </button>
+        <button
+          disabled={pageNumber === totalPages}
+          onClick={() => pageNumber < totalPages && setPageNumber(pageNumber + 1)}>
+          Next Page
+          </button>
       </header>
       <Container>
         <Row>
