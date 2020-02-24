@@ -14,7 +14,7 @@ export default function CharacterList() {
   useEffect(() => {
     axios
       .get("https://rickandmortyapi.com/api/character/")
-      .then(res => { console.log(res); return res; })
+      //.then(res => { console.log(res); return res; })
       .then(res => setCharacters(res.data.results))
       .catch(console.error);
   }, []);
@@ -39,7 +39,12 @@ export default function CharacterList() {
           {charactersShown[0] && charactersShown.map(character =>
             (
               <Card className="mx-auto mb-4" key={character.id}>
-                <Link to={`/characters/${character.id}`} className="no-decoration">
+                <Link 
+                to={{
+                  pathname: `/characters/${character.id}`,
+                  state: {modal: true}
+                }} 
+                className="no-decoration">
                   <CharacterCard {...character} />
                 </Link>
               </Card>)

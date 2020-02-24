@@ -28,7 +28,6 @@ class App extends Component {
       location.state.modal &&
       this.previousLocation !== location
     ); // not initial render
-
     return (
       <main>
         <Header />
