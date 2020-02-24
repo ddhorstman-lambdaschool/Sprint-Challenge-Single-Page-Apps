@@ -12,7 +12,7 @@
     color: inherit;
 }
 div.character-card-modal {
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     bottom: 0px;
@@ -21,6 +21,5 @@ div.character-card-modal {
     & > * {
         background-color: white;
         margin: auto;
-        width: 60%;
     }
 }

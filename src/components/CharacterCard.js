@@ -12,8 +12,15 @@ export default function CharacterCard({ modal, id, name, status, species, type, 
       </CardHeader>
       <CardBody>
         <CardImg src={image} />
-        <CardText>Species: {species}</CardText>
-        <CardText>Gender: {gender}</CardText>
+        {modal && (
+          <span>
+            <CardText>Species: {species}</CardText>
+            <CardText>Gender: {gender}</CardText>
+            <CardText>Status: {status}</CardText>
+            <CardText>Origin: {originPlanet}</CardText>
+            <CardText>Location: {currentPlanet}</CardText>
+          </span>
+        )}
       </CardBody>
       {modal && <CardFooter><button>Close</button></CardFooter>}
     </span>

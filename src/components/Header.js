@@ -13,7 +13,6 @@ export default function Header() {
       <nav className="header-nav">
         <Link to="/"><h3>Home</h3></Link>
         <Link to="/characters"><h3>Characters</h3></Link>
-        <Link to={`/characters/${randomInt(20)}`}><h3>Random!</h3></Link>
       </nav>
     </header>
   );
