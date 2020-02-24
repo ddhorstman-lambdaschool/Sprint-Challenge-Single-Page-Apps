@@ -3,29 +3,36 @@ import CharacterCard from "./CharacterCard";
 import SearchForm from "./SearchForm";
 import axios from "axios";
 import { Container, Col, Row, Card } from "reactstrap";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./styles.scss";
 
 export default function CharacterList() {
-  const [characters, setCharacters] = useState([]);
+  //Deprecated: from MVP
+  //const [characters, setCharacters] = useState([]);
   const [charactersShown, setCharactersShown] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     axios
-      .get("https://rickandmortyapi.com/api/character/")
+      .get(
+        searchTerm
+          ? `https://rickandmortyapi.com/api/character/?name=${searchTerm}`
+          : "https://rickandmortyapi.com/api/character/"
+      )
       //.then(res => { console.log(res); return res; })
-      .then(res => setCharacters(res.data.results))
+      .then(res => setCharactersShown(res.data.results))
       .catch(console.error);
-  }, []);
+  }, [searchTerm]);
 
-  useEffect(() => {
-    searchTerm
-      ? setCharactersShown(characters.filter(character =>
-        character.name.toLowerCase().includes(searchTerm.toLowerCase())
-      ))
-      : setCharactersShown(characters);
-  }, [searchTerm, characters]);
+  /*  
+    //Old code from MVP search bar behavior
+    useEffect(() => {
+      searchTerm
+        ? setCharactersShown(characters.filter(character =>
+          character.name.toLowerCase().includes(searchTerm.toLowerCase())
+        ))
+        : setCharactersShown(characters);
+    }, [searchTerm, characters]); */
 
   return (
     <div className="character-list">
@@ -39,12 +46,12 @@ export default function CharacterList() {
           {charactersShown[0] && charactersShown.map(character =>
             (
               <Card className="mx-auto mb-4" key={character.id}>
-                <Link 
-                to={{
-                  pathname: `/characters/${character.id}`,
-                  state: {modal: true}
-                }} 
-                className="no-decoration">
+                <Link
+                  to={{
+                    pathname: `/characters/${character.id}`,
+                    state: { modal: true }
+                  }}
+                  className="no-decoration">
                   <CharacterCard {...character} />
                 </Link>
               </Card>)
