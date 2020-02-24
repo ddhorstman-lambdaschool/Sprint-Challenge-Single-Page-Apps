@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import "./styles.scss";
 
 export default function Header() {
@@ -7,8 +7,8 @@ export default function Header() {
     <header className="ui centered">
       <h1 className="ui center">Rick &amp; Morty Fan Page</h1>
       <nav className="header-nav">
-        <Link to="/"><h3>Home</h3></Link>
-        <Link to="/characters"><h3>Characters</h3></Link>
+        <NavLink exact to="/"><h3>Home</h3></NavLink>
+        <NavLink to="/characters"><h3>Characters</h3></NavLink>
       </nav>
     </header>
   );

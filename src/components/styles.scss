@@ -7,6 +7,14 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
+    & a {
+        padding: 0px 30px;
+        border-radius: 5px;
+        &.active{
+         background-color: lightgrey;
+         border: 2px solid black;
+        }
+    }
 }
 .no-decoration {
     text-decoration: none;
