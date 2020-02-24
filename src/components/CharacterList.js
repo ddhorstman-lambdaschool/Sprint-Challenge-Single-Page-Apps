@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import CharacterCard from "./CharacterCard";
 import SearchForm from "./SearchForm";
 import axios from "axios";
-import { Container, Col, Row } from "reactstrap";
+import { Container, Col, Row, Card } from "reactstrap";
+import {Link} from "react-router-dom";
 import "./styles.scss";
 
 export default function CharacterList() {
@@ -36,7 +37,12 @@ export default function CharacterList() {
         <Row>
           <Col xs="auto" style={{ padding: "0px" }} />
           {charactersShown[0] && charactersShown.map(character =>
-            <CharacterCard key={character.id} {...character} />
+            (
+              <Card className="mx-auto mb-4" key={character.id}>
+                <Link to={`/characters/${character.id}`} className="no-decoration">
+                  <CharacterCard {...character} />
+                </Link>
+              </Card>)
           )}
         </Row>
       </Container>

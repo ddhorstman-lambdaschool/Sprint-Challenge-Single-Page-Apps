@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import CharacterCard from "./CharacterCard";
-import { Link } from "react-router-dom";
+import { Card } from "reactstrap";
 import axios from "axios";
+import "./styles.scss";
 
 export default function CharacterDetail(props) {
     const id = props.match.params.id;
@@ -13,7 +14,14 @@ export default function CharacterDetail(props) {
             .then(res => setCharacterData(res.data));
     }, [id]);
 
+
     return characterData.name
-        ? <CharacterCard {...characterData} />
+        ? <Card
+            onClick ={e => {
+                e.stopPropagation();
+                props.history.goBack();
+            }}
+            className = "character-card-modal"
+        ><CharacterCard {...characterData} /></Card>
         : <div />;
 }
